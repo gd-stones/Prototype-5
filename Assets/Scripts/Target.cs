@@ -6,7 +6,7 @@ using UnityEngine;
 public class Target : MonoBehaviour
 {
     Rigidbody targetRb;
-    private GameManager gameManager;
+    GameManager gameManager;
 
     float minSpeed = 14;
     float maxSpeed = 18;
@@ -26,7 +26,7 @@ public class Target : MonoBehaviour
         targetRb.AddForce(RandomForce(), ForceMode.Impulse);
         targetRb.AddTorque(RandomTorque(), RandomTorque(), RandomTorque(), ForceMode.Impulse);
 
-        transform.position = RandomSpawnPos();
+        transform.position = RandomSpawnPos(); // noi cac obj duoc sinh ra 
     }
 
     private void OnMouseDown()
