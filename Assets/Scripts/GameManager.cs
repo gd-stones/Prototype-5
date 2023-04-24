@@ -4,13 +4,15 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using JetBrains.Annotations;
 
 public class GameManager : MonoBehaviour
 {
     public List<GameObject> targets;     // public GameObject[] targets;
-    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI scoreText;    
     public TextMeshProUGUI gameOverText;
     public Button restartButton;
+    public GameObject titleScreen;
     private int score;
     float spawnRate = 1.0f;
 
@@ -19,11 +21,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isGameActive = true;
-        score = 0;
 
-        StartCoroutine(SpawnTarget());
-        UpdateScore(0);
     }
 
     IEnumerator SpawnTarget()
@@ -52,5 +50,17 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // reload scene gan nhat vua hoat dong
+    }
+
+    public void StartGame(int difftculty)
+    {
+        isGameActive = true;
+        score = 0;
+        spawnRate = spawnRate / difftculty;
+
+        StartCoroutine(SpawnTarget());
+        UpdateScore(0);
+
+        titleScreen.gameObject.SetActive(false);
     }
 }
