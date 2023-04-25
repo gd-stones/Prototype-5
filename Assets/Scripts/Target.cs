@@ -29,22 +29,32 @@ public class Target : MonoBehaviour
         transform.position = RandomSpawnPos(); // noi cac obj duoc sinh ra 
     }
 
-    private void OnMouseDown()
+    //private void OnMouseDown()
+    //{
+    //    if (gameManager.isGameActive)
+    //    {
+    //        Destroy(gameObject);
+    //        Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
+    //        gameManager.UpdateScore(pointValue);
+    //    }
+    //}
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Destroy(gameObject);
+        if (!gameObject.CompareTag("Bad") && gameManager.isGameActive)
+        {
+            gameManager.UpdateLives(-1);
+        }
+    }
+
+    public void DestroyTarget()
     {
         if (gameManager.isGameActive)
         {
             Destroy(gameObject);
             Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
             gameManager.UpdateScore(pointValue);
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Destroy(gameObject);
-        if (!gameObject.CompareTag("Bad"))
-        {
-            gameManager.GameOver();
         }
     }
 
